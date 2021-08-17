@@ -1,0 +1,18 @@
+{
+  "name": "my-blog",
+  "private": true,
+  "scripts": {
+    "develop": "gridsome develop",
+    "explore": "gridsome explore",
+    "build": "gridsome build"
+  },
+  "dependencies": {
+    "@gridsome/source-graphql": "^0.1.0",
+    "bootstrap-vue": "^2.21.2",
+    "gridsome": "^0.7.0"
+  },
+  "devDependencies": {
+    "vue-svg-inline-loader": "^2.1.2",
+    "vue-svg-loader": "^0.16.0"
+  }
+}
