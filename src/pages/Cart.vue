@@ -134,7 +134,7 @@ li{
 .bt-noneborder{
     font-family: 'Rubik', karla, -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
     background: #ffffff;
-    color: #5828e8;
+    color: #f3752c;
     margin-left: 10px;
     float: right;
     border: none;
@@ -154,7 +154,7 @@ li{
     display: flex;
     align-items: center;
     text-decoration: none;
-    border: 1px solid #5828e8;
+    border: 1px solid #f3752c;
     width: 7rem;
     text-align: center;
     justify-content: center;
@@ -164,7 +164,7 @@ li{
     border-radius: 5px;
 }
 .bt:hover{
-  background: #5828e8;
+  background: #f3752c;
   color: #f5f5f5;
 }
 .product-content{
@@ -208,12 +208,12 @@ li{
 }
 .product-name{
   font-size: 1.125rem;
-  color: #101b42;
+  color: #662500;
   font-weight: 700;
   margin-bottom: .5rem;
 }
 .product-name:hover{
-   color: #5828e8;
+   color: #f3752c;
 }
 .right {
   float: right;

@@ -102,8 +102,8 @@ query GetProduct($id: ID) {
     display: flex;
     align-items: center;
     text-decoration: none;
-    border: 1px solid #5828e8;
-    background: #5828e8;
+    border: 1px solid #922f17;
+    background: #922f17;
     width: 7rem;
     text-align: center;
     justify-content: center;
@@ -115,7 +115,7 @@ query GetProduct($id: ID) {
 }
 .button:hover{
   background: #ffffff;
-  color: #5828e8;
+  color: #922f17;
 }
 
 .product-content{
@@ -155,12 +155,12 @@ query GetProduct($id: ID) {
 }
 .product-name{
   font-size: 1.125rem;
-  color: #101b42;
+  color: #922f17;
   font-weight: 700;
   margin-bottom: .5rem;
 }
 .product-name:hover{
-   color: #5828e8;
+   color: #d8441f;
 }
 .product-price{
   font-size: .875rem;

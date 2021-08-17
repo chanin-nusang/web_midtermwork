@@ -38,7 +38,7 @@ body {
 .headerText{
   text-decoration: none;
    font-size: 4rem;
-  color: #5828e8;
+  color: #f3752c;
 }
 .nav__link {
   margin-left: 20px;

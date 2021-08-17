@@ -90,7 +90,7 @@ export default {
     display: flex;
     align-items: center;
     text-decoration: none;
-    border: 1px solid #5828e8;
+    border: 1px solid #f3752c;
     width: 7rem;
     text-align: center;
     justify-content: center;
@@ -100,7 +100,7 @@ export default {
     border-radius: 5px;
 }
 .button:hover{
-  background: #5828e8;
+  background: #f3752c;
   color: #f5f5f5;
 }
 .product-content{
@@ -140,12 +140,12 @@ export default {
 }
 .product-name{
   font-size: 1.125rem;
-  color: #101b42;
+  color: #f75409;
   font-weight: 700;
   margin-bottom: .5rem;
 }
 .product-name:hover{
-   color: #5828e8;
+   color: #922f17;
 }
 .product-price{
   font-size: .875rem;
