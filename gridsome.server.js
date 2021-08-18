@@ -18,6 +18,10 @@ module.exports = function (api) {
             id
             slug
           }
+          categories {
+            id
+            slug
+          }
         }
       }
     `);
@@ -25,6 +29,15 @@ module.exports = function (api) {
       createPage({
         path: `/product/${node.slug}`,
         component: './src/templates/Product.vue',
+        context: {
+          id: node.id,
+        },
+      });
+    });
+    data.deep.categories.forEach(node => {
+      createPage({
+        path: `/category/${node.slug}`,
+        component: './src/templates/Category.vue',
         context: {
           id: node.id,
         },

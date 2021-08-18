@@ -1,58 +1,70 @@
 <template>
     <Layout>
-        <div v-if="this.$page.deep.product" class="product_layout" >
-            <div> 
-              <g-image :src="product.images[0].url" class="img" alt="new image" />    
+        <div v-if="this.$page.deep.category"  >
+            <div class="divide__between">
+                <h1>{{ category.name }}</h1>
+                <g-link :to="'cart'" class="button" >
+                    <img svg-inline src="~/assets/svg/shopping-cart.svg" alt="shopping-cart" />&nbsp; Cart
+                </g-link>
             </div>
-            <div>
-                <h1> {{ product.name }} </h1>
-                    <g-link v-for="item in product.categories" :to="'category/' + item.slug" class="category-bt" :key="item.name">
-                      {{ item.name }}
-                    </g-link>
-                <p > {{ product.description.markdown }} </p>
-                <p>
-                    {{ product.price.toLocaleString() }} THB
-                </p>
-            </div>
-            <button  class="button" @click="addToCart(product)">
-            Add to Cart
-        </button>
+        
+    <div v-if="$page.deep.category.products" class="product-grid">
+      <div
+        v-for="(product) in category.products"
+        :key="product.id"
+        class="flex-col"
+      >
+        <g-link :to="'product/' + product.slug" class="link" >
+        <div class="product-wrapper">
+          <g-image v-for="(images, slug) in product.images" class="img" :key="slug" :src="images.url" />   
+           <div class="product-content">
+          <p class="product-name"> {{ product.name }}</p>
+          <p class="product-price">  {{ product.price.toLocaleString() }} THB</p>
+        </div>    
         </div>
-        
-        
-        
+       
+        </g-link>  
+      </div>
+    </div>
+  </div>
     </Layout>
 </template>
 
 <script>
 export default {
     metaInfo: {
-    title: 'Product'
+    title: 'Category'
   },
     data() {
         return {
         cartItems: [],
-        product: [{
+        products: [{
         name: '',
         description: {
           markdown: ''
         },
-        categories: [{
-          name: '',
-          slug: ''
-        }],
+        categories: {
+          name: ''
+        },
         price: '',
         images: [{
           url: ''
+        }]
+      }],
+        category: [{
+          name: '',
+        description: '',
+        products:[{
+            name: ''
         }],
         slug: ''
-      }],
+        }]
         
         }
     },
     created(){
-        this.product = this.$page.deep.product
-        console.log('Product here', this.product)
+        this.category = this.$page.deep.category
+        console.log('Category here', this.category)
     },
     methods: {
     addToCart(item) {
@@ -70,21 +82,26 @@ export default {
 </script>
 
 <page-query>
-query GetProduct($id: ID) {
+query GetCategory($id: ID) {
     deep {
-        product(where: {id: $id}) {
+        category(where: {id: $id}) {
                 id
             name
-            description{
-                markdown
-            }
-            categories{
+            description
+            products{
+              id
                 name
+                description{
+                    markdown
+                }
+                categories{
+                    name
+                }
+                price
+                images {
+                    url
+                }
                 slug
-            }
-            price
-            images{
-                url
             }
             slug
         }
@@ -96,7 +113,7 @@ query GetProduct($id: ID) {
     .img{
         width: 300px;
     }
-    .product_layout{
+    .category_layout{
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
@@ -106,7 +123,6 @@ query GetProduct($id: ID) {
   display: flex;
   justify-content: space-between;
 }
-
 .button{font-family: 'Rubik', karla, -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
     display: flex;
     align-items: center;
@@ -128,27 +144,23 @@ query GetProduct($id: ID) {
 }
 
 .category-bt{font-family: 'Rubik', karla, -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-    /* display: flex; */
+    display: flex;
     align-items: center;
     text-decoration: none;
-    border: 1px solid #f3752c;
-    background: #ffffff;
+    border: 1px solid #922f17;
+    background: #922f17;
     width: 7rem;
     text-align: center;
     justify-content: center;
-    height: 1.5rem;
+    height: 3rem;
     margin-top: .75rem;
     margin-bottom: .75rem;
-    margin-right: .75rem;
     border-radius: 5px;
-    color: #f3752c;
-    display: inline-block;
-    justify-content: space-between;
-    vertical-align: middle;
+    color: #ffffff;
 }
 .category-bt:hover{
-  background: #f3752c;
-  color: #ffffff;
+  background: #ffffff;
+  color: #922f17;
 }
 
 .product-content{
