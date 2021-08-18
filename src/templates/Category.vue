@@ -127,8 +127,8 @@ query GetCategory($id: ID) {
     display: flex;
     align-items: center;
     text-decoration: none;
-    border: 1px solid #922f17;
-    background: #922f17;
+    border: 1px solid #f3752c;
+    background: #f3752c;
     width: 7rem;
     text-align: center;
     justify-content: center;
@@ -140,7 +140,7 @@ query GetCategory($id: ID) {
 }
 .button:hover{
   background: #ffffff;
-  color: #922f17;
+  color: #f3752c;
 }
 
 .category-bt{font-family: 'Rubik', karla, -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;

@@ -91,6 +91,7 @@ export default {
     align-items: center;
     text-decoration: none;
     border: 1px solid #f3752c;
+    background: #f3752c;
     width: 7rem;
     text-align: center;
     justify-content: center;
@@ -98,10 +99,11 @@ export default {
     margin-top: .75rem;
     margin-bottom: .75rem;
     border-radius: 5px;
+    color: #ffffff;
 }
 .button:hover{
-  background: #f3752c;
-  color: #f5f5f5;
+  background: #ffffff;
+  color: #f3752c;
 }
 .product-content{
   padding-top: 1.5rem;
