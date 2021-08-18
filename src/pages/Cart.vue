@@ -25,7 +25,7 @@
                 <strong>Total Price : {{ TotalPrice.toLocaleString() }} THB</strong>
               </h2>
               
-            <g-link :to="'cart/#'" class="bt" >
+            <g-link :to="'/'" class="bt" >
             Checkout
         </g-link>
         <button  class="bt-noneborder"  @click="deleteItem()" onClick="history.go(0);">
