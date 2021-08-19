@@ -74,7 +74,7 @@ export default {
   data() {
     return {
       productsContian: [],
-      selected: 'Bakery/Cake',
+      selected: 'select',
       currentPage: 1,
       perPage: 24,
       products: [{
@@ -92,8 +92,8 @@ export default {
       }],
       categories: [{
         id: '',
-        name: '',
-        slug: ''
+        name: 'Bakery/Cake',
+        slug: 'bakery-cake'
       }],
       items: 50
     }
