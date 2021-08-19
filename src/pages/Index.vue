@@ -2,6 +2,11 @@
   <Layout>
     <div class="divide__between">
       <h1>Menu</h1>
+      <g-link :to="'cart'" class="button" >
+        <img svg-inline src="~/assets/svg/shopping-cart.svg" alt="shopping-cart" />&nbsp; Cart
+      </g-link>
+    </div>
+    <div class="divide__between">
       <v-select  class="style-chooser"
             placeholder="Choose a Category Option" 
             v-model="selected" 
@@ -9,6 +14,23 @@
             label="name"
             @input="setSelected">
       </v-select>
+      <div class="priceRange">
+      <h6>
+        &nbsp;Price range
+      </h6>
+
+      
+        <button id="show-btn" class="button-price" @click="price0_100()">
+          0 - 100 THB
+        </button>
+        <button id="show-btn" class="button-price" @click="price101_200()">
+          101 - 200 THB
+        </button>
+        <button id="show-btn" class="button-price" @click="price201_300()">
+          201 - 300 THB
+        </button>
+      
+    </div>
       <div class="pagination">
       <b-pagination class="pagination-item"
       v-model="currentPage"
@@ -20,26 +42,6 @@
     ></b-pagination>
 
       </div> 
-      <!-- <v-pagination 
-        v-model="currentPage" 
-        :page-count="3"
-        @change="selectPage(currentPage)"
-        >
-
-      </v-pagination> -->
-      <!-- <b-pagination 
-        v-model="currentPage" 
-        pills 
-        :total-rows="rows"
-        :per-page="perPage"
-        align="center"
-        @click.native="selectPage(currentPage)">
-      </b-pagination> -->
-      
-      
-      <g-link :to="'cart'" class="button" >
-        <img svg-inline src="~/assets/svg/shopping-cart.svg" alt="shopping-cart" />&nbsp; Cart
-      </g-link>
     </div>
   <div>
     <div v-if="$page.allProducts.products" class="product-grid">
@@ -101,7 +103,7 @@ export default {
     }
   },
  created(){
-  this.products = this.$page.allProducts.products
+  this.products = this.$page.page1.products
   this.categories = this.$page.allProducts.categories
   this.items = this.$page.allProducts.products.length
   if (this.selected == "All") {
@@ -128,6 +130,15 @@ export default {
       if (page == 3) {
         this.products = this.$page.page3.products
       }
+    },
+    price0_100() {
+      this.products = this.$page.price0_100.products
+    },
+    price101_200() {
+      this.products = this.$page.price101_200.products
+    },
+    price201_300() {
+      this.products = this.$page.price201_300.products
     }
 }
 }
@@ -228,6 +239,77 @@ export default {
         slug
       }
     }
+    price0_100:deep {
+      products(where:{ AND: [{ price_gt: 0 }, { price_lte: 100 }] }){
+        id
+        name
+        description{
+          markdown
+        }
+        categories{
+                name
+                slug
+            }
+        price
+        images {
+          url
+        }
+        slug
+      }
+      categories {
+        id
+        name
+        slug
+      }
+    }
+    price101_200:deep {
+      products(where:{ AND: [{ price_gt: 101 }, { price_lte: 200 }] }){
+        id
+        name
+        description{
+          markdown
+        }
+        categories{
+                name
+                slug
+            }
+        price
+        images {
+          url
+        }
+        slug
+      }
+      categories {
+        id
+        name
+        slug
+      }
+    }
+    price201_300:deep {
+      products(where:{ AND: [{ price_gt: 201 }, { price_lte: 300 }] }){
+        id
+        name
+        description{
+          markdown
+        }
+        categories{
+                name
+                slug
+            }
+        price
+        images {
+          url
+        }
+        slug
+      }
+      categories {
+        id
+        name
+        slug
+      }
+    }
+
+
   }
 
 </page-query>
@@ -250,6 +332,14 @@ export default {
 .style-chooser .vs__open-indicator {
   fill: #f3752c;
 }
+.filterPrice-btn {
+  background-color: #97634e;
+}
+.filterPrice-btn:hover,
+.filterPrice-btn:active,
+.filterPrice-btn:focus {
+  background-color: #6d3a11;
+}
 .pagination{
   display: flex;
   list-style-type: none;
@@ -258,7 +348,17 @@ export default {
   
   color: #f3752c;
 }
+.pagination-item:hover{
+  background: #ffffff;
+  color: #f3752c;
+}
 .divide__between{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+}
+.priceRange{
   display: flex;
   justify-content: space-between;
   flex-direction: row;
@@ -314,6 +414,27 @@ export default {
     color: #ffffff;
 }
 .button:hover{
+  background: #ffffff;
+  color: #f3752c;
+}
+.button-price{
+  display: flex;
+  font-size: 12px;
+    align-items: center;
+    text-decoration: none;
+    border: 1px solid #f3752c;
+    background: #f3752c;
+    width: 6rem;
+    text-align: center;
+    justify-content: center;
+    height: 2rem;
+    margin-top: 0;
+    margin-left: 1rem;
+    margin-bottom: 0;
+    border-radius: 5px;
+    color: #ffffff;
+}
+.button-price:hover{
   background: #ffffff;
   color: #f3752c;
 }
