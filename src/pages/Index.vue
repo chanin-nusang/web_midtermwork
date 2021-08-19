@@ -14,6 +14,7 @@
             label="name"
             @input="setSelected">
       </v-select>
+
       <div class="priceRange">
       <h6>
         &nbsp;Price range
@@ -73,7 +74,7 @@ export default {
   data() {
     return {
       productsContian: [],
-      selected: 'All',
+      selected: 'Bakery/Cake',
       currentPage: 1,
       perPage: 24,
       products: [{

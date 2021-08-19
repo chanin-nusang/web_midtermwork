@@ -64,7 +64,7 @@ export default {
       localStorage.setItem("product", JSON.stringify(this.cartItems))
       console.log('Add %s to Cart', this.product.name)
       alert("ใส่ตะกร้าแล้ว รอชำระเงิน")
-      this.$router.push('/')
+      // this.$router.push('/')
     }
   }
 }  
