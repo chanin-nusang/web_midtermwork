@@ -12,7 +12,9 @@
             v-model="selected" 
             :options="categories" 
             label="name"
-            @input="setSelected">
+            @input="setSelected"
+            :onChange="setSelected">
+            <option disabled></option>
       </v-select>
 
       <div class="priceRange">
@@ -74,7 +76,7 @@ export default {
   data() {
     return {
       productsContian: [],
-      selected: 'select',
+      selected: [],
       currentPage: 1,
       perPage: 24,
       products: [{
@@ -118,8 +120,9 @@ export default {
   console.log('Index here', this.productsContian.length)
  },
  methods: {
-  setSelected(value) {
-    console.log('Select : ', value.name)
+  setSelected(){
+    console.log('Selected in created : ', this.selected);
+    this.$router.push('category/' + this.selected.slug);
   },
     selectPage(page) {
       if (page == 1) {

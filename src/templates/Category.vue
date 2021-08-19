@@ -3,12 +3,14 @@
         <div v-if="this.$page.deep.category"  >
             <div class="divide__between">
                 <h1>{{ category.name }}</h1>
+                <div class="divide__between_button">
                 <g-link :to="'/'" class="button" >
-                    <img svg-inline  />&nbsp; Back
+                    <img svg-inline  />&nbsp;Back
                 </g-link>
                 <g-link :to="'cart'" class="button" >
                     <img svg-inline src="~/assets/svg/shopping-cart.svg" alt="shopping-cart" />&nbsp; Cart
                 </g-link>
+                </div>
             </div>
         
     <div v-if="$page.deep.category.products" class="product-grid">
@@ -125,6 +127,12 @@ query GetCategory($id: ID) {
     .divide__between{
   display: flex;
   justify-content: space-between;
+}
+.divide__between_button
+{
+  display: flex;
+  justify-content: space-between;
+  width: 21%;
 }
 .button{font-family: 'Rubik', karla, -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
     display: flex;
