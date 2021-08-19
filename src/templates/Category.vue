@@ -3,6 +3,9 @@
         <div v-if="this.$page.deep.category"  >
             <div class="divide__between">
                 <h1>{{ category.name }}</h1>
+                <g-link :to="'/'" class="button" >
+                    <img svg-inline  />&nbsp; Back
+                </g-link>
                 <g-link :to="'cart'" class="button" >
                     <img svg-inline src="~/assets/svg/shopping-cart.svg" alt="shopping-cart" />&nbsp; Cart
                 </g-link>

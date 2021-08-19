@@ -9,6 +9,9 @@
             label="name"
             @input="setSelected">
       </v-select>
+      <g-link :to="'category/'+(categories.name =selected ).slug "  class="button" >
+        <img svg-inline   />&nbsp; Search
+      </g-link>
       <div class="pagination">
       <b-pagination class="pagination-item"
       v-model="currentPage"
@@ -71,7 +74,7 @@ export default {
   data() {
     return {
       productsContian: [],
-      selected: 'All',
+      selected: 'Bakery/Cake',
       currentPage: 1,
       perPage: 24,
       products: [{

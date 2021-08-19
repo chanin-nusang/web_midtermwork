@@ -1,7 +1,7 @@
 <template>
     <Layout>
         <div class="divide__between">
-            <h1>Cart</h1>
+            <h1>Bill</h1>
         </div>
         
         <span v-if="cartItems">
@@ -24,15 +24,16 @@
             <h2 >
                 <strong>Total Price : {{ TotalPrice.toLocaleString() }} THB</strong>
               </h2>
+            <p @click="checkoutItem()">
+             <g-link :to="'/'" class="bt"   >
             
-             <g-link :to="'result/'" class="bt"   >
-            Checkout
+            back  
             <!-- {{ this.$router.push('/')}} -->
-          </g-link> 
-           
-        <button  class="bt-noneborder"  @click="deleteItem()" onClick="history.go(0);">
+            </g-link> 
+            </p>
+        <!-- <button  class="bt-noneborder"  @click="deleteItem()" onClick="history.go(0);">
             Remove
-        </button>
+        </button> -->
             </div>
             
     </Layout>
@@ -45,7 +46,7 @@ export default {
     console.log('openModal called')
  },
   metaInfo: {
-    title: 'Cart'
+    title: 'Bill'
   },
   data() {
     return {
@@ -61,9 +62,9 @@ export default {
     checkoutItem() {
       localStorage.removeItem("product")
       console.log("test")
-      alert("สั่งซื้อเรียบร้อยแล้ว")
-      deleteItem()
-      router.go("cart")
+      if (this.cartItems.length > 0)
+        alert("สั่งซื้อเรียบร้อยแล้ว")
+      
     },
     deleteItem() {
       localStorage.removeItem("product")
