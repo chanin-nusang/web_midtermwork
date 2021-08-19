@@ -1,6 +1,8 @@
 {
   "name": "my-blog",
   "private": true,
+  "postinstall": "npm run build",
+  "start": "node server.js",
   "scripts": {
     "develop": "gridsome develop",
     "explore": "gridsome explore",
@@ -9,7 +11,9 @@
   "dependencies": {
     "@gridsome/source-graphql": "^0.1.0",
     "bootstrap-vue": "^2.21.2",
+    "express": "^4.17.1",
     "gridsome": "^0.7.0",
+    "serve-static": "^1.14.1",
     "vue-plain-pagination": "^0.3.0",
     "vue-select": "^3.12.2"
   },
