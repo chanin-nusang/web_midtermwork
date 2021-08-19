@@ -1,7 +1,14 @@
 <template>
   <Layout>
     <div class="divide__between">
-      <h1>Showcase</h1>
+      <h1>Menu</h1>
+      <v-select  class="style-chooser"
+            placeholder="Choose a Category Option" 
+            v-model="selected" 
+            :options="categories" 
+            label="name"
+            @input="setSelected">
+      </v-select>
       <g-link :to="'cart'" class="button" >
         <img svg-inline src="~/assets/svg/shopping-cart.svg" alt="shopping-cart" />&nbsp; Cart
       </g-link>
@@ -33,27 +40,49 @@
 export default {
   data() {
     return {
-    
+      productsContian: [],
+      selected: 'Bakery/Cake',
       products: [{
         name: '',
         description: {
           markdown: ''
         },
-        categories: {
+        categories: [{
           name: ''
-        },
+        }],
         price: '',
         images: [{
           url: ''
         }]
       }],
+      categories: [{
+        id: '',
+        name: '',
+        slug: ''
+      }]
     }
   },
  created(){
   this.products = this.$page.deep.products
+  this.categories = this.$page.deep.categories
+  if (this.selected == "All") {
+    this.productsContian = this.products;
+  } else {
+    console.log('Selected in created : ', this.selected)
+    console.log('Products lenght in created : ', this.products.length)
+    this.productsContian = this.products.filter((product) => {
+      console.log('Category in product : ', product.categories.length);
+      return product.categories.includes({name: this.selected});
+    });
+    // this.selected.includes(p.categories.name)
+  }
+  console.log('Index here', this.productsContian.length)
  },
- 
- 
+ methods: {
+  setSelected(value) {
+    console.log('Select : ', value.name)
+  }
+}
 }
 </script>
 
@@ -67,12 +96,18 @@ export default {
           markdown
         }
         categories{
-          name
-        }
+                name
+                slug
+            }
         price
         images {
           url
         }
+        slug
+      }
+      categories {
+        id
+        name
         slug
       }
     }
@@ -82,10 +117,61 @@ export default {
 
 
 <style>
+.style-chooser .vs__search::placeholder,
+.style-chooser .vs__dropdown-toggle,
+.style-chooser .vs__dropdown-menu {
+  background: #f5f5f5;
+  border: none;
+  color: #f3752c;
+  text-transform: lowercase;
+  font-variant: small-caps;
+  width: 13rem;
+}
+
+.style-chooser .vs__clear,
+.style-chooser .vs__open-indicator {
+  fill: #f3752c;
+}
 .divide__between{
   display: flex;
   justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
 }
+.tool-block {
+  /* display: flex; */
+  flex-wrap: wrap;
+  flex-direction: row;
+  vertical-align: top;
+  /* float: right; */
+  justify-content: space-between;
+
+}
+.column {
+  float: left;
+  padding: 10px;
+  flex-direction: column;
+  
+}
+.left{
+  max-width: 50%;
+  padding-right: 3rem;
+}
+.right {
+  max-width: 50%;
+  padding-left: 3rem;
+}
+.middle {
+  width: 50%;
+}
+
+.row::after{
+  content: "";
+  clear: both;
+  width: 100%;
+  display: table;
+}
+
 .button{
     display: flex;
     align-items: center;

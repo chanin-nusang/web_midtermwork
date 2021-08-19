@@ -9,7 +9,8 @@
   "dependencies": {
     "@gridsome/source-graphql": "^0.1.0",
     "bootstrap-vue": "^2.21.2",
-    "gridsome": "^0.7.0"
+    "gridsome": "^0.7.0",
+    "vue-select": "^3.12.2"
   },
   "devDependencies": {
     "vue-svg-inline-loader": "^2.1.2",
