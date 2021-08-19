@@ -9,12 +9,40 @@
             label="name"
             @input="setSelected">
       </v-select>
+      <div class="pagination">
+      <b-pagination class="pagination-item"
+      v-model="currentPage"
+      pills
+      :total-rows="rows"
+      :per-page="perPage"
+      align="center"
+      @click.native="selectPage(currentPage)"
+    ></b-pagination>
+
+      </div> 
+      <!-- <v-pagination 
+        v-model="currentPage" 
+        :page-count="3"
+        @change="selectPage(currentPage)"
+        >
+
+      </v-pagination> -->
+      <!-- <b-pagination 
+        v-model="currentPage" 
+        pills 
+        :total-rows="rows"
+        :per-page="perPage"
+        align="center"
+        @click.native="selectPage(currentPage)">
+      </b-pagination> -->
+      
+      
       <g-link :to="'cart'" class="button" >
         <img svg-inline src="~/assets/svg/shopping-cart.svg" alt="shopping-cart" />&nbsp; Cart
       </g-link>
     </div>
   <div>
-    <div v-if="$page.deep.products" class="product-grid">
+    <div v-if="$page.allProducts.products" class="product-grid">
       <div
         v-for="(product) in products"
         :key="product.id"
@@ -37,11 +65,15 @@
 </template>
 
 <script>
+import vPagination from 'vue-plain-pagination'
 export default {
+  components: { vPagination },
   data() {
     return {
       productsContian: [],
-      selected: 'Bakery/Cake',
+      selected: 'All',
+      currentPage: 1,
+      perPage: 24,
       products: [{
         name: '',
         description: {
@@ -59,21 +91,25 @@ export default {
         id: '',
         name: '',
         slug: ''
-      }]
+      }],
+      items: 50
+    }
+  },
+  computed: {
+    rows() {
+      return this.$page.allProducts.products.length
     }
   },
  created(){
-  this.products = this.$page.deep.products
-  this.categories = this.$page.deep.categories
+  this.products = this.$page.allProducts.products
+  this.categories = this.$page.allProducts.categories
+  this.items = this.$page.allProducts.products.length
   if (this.selected == "All") {
     this.productsContian = this.products;
   } else {
     console.log('Selected in created : ', this.selected)
     console.log('Products lenght in created : ', this.products.length)
-    this.productsContian = this.products.filter((product) => {
-      console.log('Category in product : ', product.categories.length);
-      return product.categories.includes({name: this.selected});
-    });
+    
     // this.selected.includes(p.categories.name)
   }
   console.log('Index here', this.productsContian.length)
@@ -81,15 +117,96 @@ export default {
  methods: {
   setSelected(value) {
     console.log('Select : ', value.name)
-  }
+  },
+    selectPage(page) {
+      if (page == 1) {
+        this.products = this.$page.page1.products
+      }
+      if (page == 2) {
+        this.products = this.$page.page2.products
+      }
+      if (page == 3) {
+        this.products = this.$page.page3.products
+      }
+    }
 }
 }
 </script>
 
 <page-query>
   {
-    deep{
+    allProducts:deep {
       products {
+        id
+        name
+        description{
+          markdown
+        }
+        categories{
+                name
+                slug
+            }
+        price
+        images {
+          url
+        }
+        slug
+      }
+      categories {
+        id
+        name
+        slug
+      }
+    }
+
+    page1:deep {
+      products(first: 24){
+        id
+        name
+        description{
+          markdown
+        }
+        categories{
+                name
+                slug
+            }
+        price
+        images {
+          url
+        }
+        slug
+      }
+      categories {
+        id
+        name
+        slug
+      }
+    }
+    page2:deep {
+      products(skip: 24, first: 48){
+        id
+        name
+        description{
+          markdown
+        }
+        categories{
+                name
+                slug
+            }
+        price
+        images {
+          url
+        }
+        slug
+      }
+      categories {
+        id
+        name
+        slug
+      }
+    }
+    page3:deep {
+      products(skip: 48, first: 72){
         id
         name
         description{
@@ -117,6 +234,7 @@ export default {
 
 
 <style>
+
 .style-chooser .vs__search::placeholder,
 .style-chooser .vs__dropdown-toggle,
 .style-chooser .vs__dropdown-menu {
@@ -131,6 +249,14 @@ export default {
 .style-chooser .vs__clear,
 .style-chooser .vs__open-indicator {
   fill: #f3752c;
+}
+.pagination{
+  display: flex;
+  list-style-type: none;
+}
+.pagination-item{
+  
+  color: #f3752c;
 }
 .divide__between{
   display: flex;
